@@ -5,6 +5,9 @@ class Tag(models.Model):
     name = models.CharField(max_length=31, unique=True)
     slug = models.SlugField(max_length=31, unique=True, help_text='A label for URL config. ')
 
+    def __str__(self):
+        return self.name
+
 class Startup(models.Model):
     name = models.CharField(max_length=31, db_index=True)   # index automatically in the database
     slug = models.SlugField(max_length=31, unique=True, help_text='A label for URL config. ')   #unique fields are automatically indexed
@@ -20,6 +23,9 @@ class Startup(models.Model):
     # associated with tags via a many-to-many relationship
     tags = models.ManyToManyField(Tag)
 
+    def __str__(self):
+        return self.name
+
 class NewsLink(models.Model):
     title = models.CharField(max_length=63)
     pub_date = models.DateField('date published')
@@ -33,3 +39,5 @@ class NewsLink(models.Model):
     #  a news link has a foreign key to a startup.
     startup = models.ForeignKey(Startup, on_delete=models.DO_NOTHING)
 
+    def __str__(self):
+        return "{}:{}".format(self.startup, self.title)
