@@ -8,6 +8,9 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']  # order the instances by name
+
 class Startup(models.Model):
     name = models.CharField(max_length=31, db_index=True)   # index automatically in the database
     slug = models.SlugField(max_length=31, unique=True, help_text='A label for URL config. ')   #unique fields are automatically indexed
@@ -26,6 +29,10 @@ class Startup(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+        get_latest_by = 'founded_date'
+
 class NewsLink(models.Model):
     title = models.CharField(max_length=63)
     pub_date = models.DateField('date published')
@@ -41,3 +48,8 @@ class NewsLink(models.Model):
 
     def __str__(self):
         return "{}:{}".format(self.startup, self.title)
+
+    class Meta:
+        verbose_name = "news article"   # to change name of class from news link to news article
+        ordering = ["-pub_date"]
+        get_latest_by = "pub_date"
