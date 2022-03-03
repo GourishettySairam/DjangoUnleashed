@@ -5,11 +5,11 @@
     <dl>
         <dt>Date Founded</dt>
         <dd>
-            {{ startup.founded_date }}
+            {{ startup.founded_datee|date:"F jS, Y"  }}
         </dd>
         <dt>Website</dt>
         <dd>
-            {{ startup.website }}
+            {{ startup.website|urlize }}
         </dd>
         <dt>Contact</dt>
         <dd>
@@ -18,11 +18,13 @@
         <dt>Tag{{ startup.tags.count|pluralize }}</dt>
         { % for tag in startup.tags.all % }
         <dd>
-            {{ startup.website|urlize }}
+            <a href="">
+                {{ tag.name|title }}
+            </a>
         </dd>
     </dl>
 
-    <p>{{ startup.description </p>
+    <p>{{ startup.description|linebreaks }}</p>
 
         { % if startup.newslink_set.all % }
         <section>
