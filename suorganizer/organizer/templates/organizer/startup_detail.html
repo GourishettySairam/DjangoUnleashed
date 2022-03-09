@@ -16,7 +16,7 @@
             {{ startup.contact }}
         </dd>
         <dt>Tag{{ startup.tags.count|pluralize }}</dt>
-        { % for tag in startup.tags.all % }
+        {% for tag in startup.tags.all %}
         <dd>
             <a href="">
                 {{ tag.name|title }}
@@ -26,35 +26,35 @@
 
     <p>{{ startup.description|linebreaks }}</p>
 
-        { % if startup.newslink_set.all % }
+        {% if startup.newslink_set.all %}
         <section>
             <h3>
                 Recent News
             </h3>
             <ul>
-                { % for newslink in startup.newslink_set.all % }
+                {% for newslink in startup.newslink_set.all %}
                 <li>
                     <a href="{{ newslink.link }}">
                         {{ newslink.title|title }}
                     </a>
                 </li>
-                { % endfor % }
+                {% endfor %}
             </ul>
         </section>
-        { % endif % }
+        {% endif %}
 
-        { % if startup.blog_posts.all % }
+        {% if startup.blog_posts.all %}
         <section>
             <h3>Blog Post{{ startup.blog_posts.all|pluralize }}</h3>
             <ul>
-                { % for post in startup.blog_posts.all % }
+                {% for post in startup.blog_posts.all %}
                 <li>
                     <a href="">
                         {{ post.title|title }}
                     </a>
                 </li>
-                { % endfor % }
+                {% endfor %}
             </ul>
         </section>
-        { % endif % }
+        {% endif %}
 </article>
