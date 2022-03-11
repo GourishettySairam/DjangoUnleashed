@@ -22,5 +22,5 @@ from organizer.views import homepage, tag_detail
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', homepage),
-    url(r'tag/(?P<slug>[\w\-]+)/$', tag_detail,)
+    url(r'tag/(?P<slug>[\w\-]+)/$', tag_detail,name='organizer_tag_detail')
 ]
