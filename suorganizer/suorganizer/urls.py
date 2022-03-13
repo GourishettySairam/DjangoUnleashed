@@ -19,8 +19,9 @@ from django.conf.urls import include, url
 
 from organizer.views import homepage, tag_detail
 
+from organizer import urls as organizer_urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^$', homepage),
-    url(r'tag/(?P<slug>[\w\-]+)/$', tag_detail,name='organizer_tag_detail')
+    url(r'^', include(organizer_urls))    
 ]
