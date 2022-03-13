@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from django.http.response import HttpResponse, Http404, HttpResponseNotFound
 from .models import Tag
@@ -13,11 +13,7 @@ def homepage(request):
     return HttpResponse(output)
 
 def tag_detail(request, slug):
-    try:
-        tag = Tag.objects.get(slug__iexact=slug)
-    except Tag.DoesNotExist:
-        raise Http404
-        # return HttpResponseNotFound("<h1>Tag not found</h1>")
+    tag = get_object_or_404(Tag, slug__iexact=slug)
     template = loader.get_template('organizer/tag_detail.html')
     context = {'tag': tag}
     return HttpResponse(template.render(context))
