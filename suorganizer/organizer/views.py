@@ -16,8 +16,8 @@ def tag_detail(request, slug):
     try:
         tag = Tag.objects.get(slug__iexact=slug)
     except Tag.DoesNotExist:
-        # raise Http404
-        return HttpResponseNotFound("<h1>Tag not found</h1>")
+        raise Http404
+        # return HttpResponseNotFound("<h1>Tag not found</h1>")
     template = loader.get_template('organizer/tag_detail.html')
     context = {'tag': tag}
     return HttpResponse(template.render(context))
