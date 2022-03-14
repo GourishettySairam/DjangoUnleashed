@@ -17,8 +17,6 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 
-from organizer.views import homepage, tag_detail
-
 from organizer import urls as organizer_urls
 
 urlpatterns = [
