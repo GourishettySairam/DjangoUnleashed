@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
 from .models import Post
 
+from django.views.decorators.http import require_http_methods
+
 # Create your views here
 
 class PostList(View):
@@ -10,6 +12,7 @@ class PostList(View):
     def get(self, request):
         return render(request, self.template_name, {'post_list': Post.objects.all()})
 
+@require_http_methods(['HEAD', 'GET'])
 def post_detail(request, year, month, slug, parent_template=None):
     post = get_object_or_404(Post,
         pub_date__year=year,
