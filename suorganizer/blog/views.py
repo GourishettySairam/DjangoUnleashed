@@ -5,8 +5,10 @@ from .models import Post
 # Create your views here
 
 class PostList(View):
-    def get(self, request, parent_template=None):
-        return render(request, 'blog/post_list.html', {'post_list': Post.objects.all(), 'parent_template': parent_template})
+    template_name = ''
+
+    def get(self, request):
+        return render(request, self.template_name, {'post_list': Post.objects.all()})
 
 def post_detail(request, year, month, slug, parent_template=None):
     post = get_object_or_404(Post,
