@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Tag(models.Model):
@@ -10,6 +11,9 @@ class Tag(models.Model):
 
     class Meta:
         ordering = ['name']  # order the instances by name
+
+    def get_absolute_url(self):
+        return reverse('organizer_tag_detail', kwargs={'slug': self.slug})
 
 class Startup(models.Model):
     name = models.CharField(max_length=31, db_index=True)   # index automatically in the database
