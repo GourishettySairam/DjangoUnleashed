@@ -13,7 +13,7 @@ class Tag(models.Model):
         ordering = ['name']  # order the instances by name
 
     def get_absolute_url(self):
-        return reverse('organizer_tag_detail', kwargs={'slug': self.slug})
+        return reverse('organizer_tag_detail', args=(self.slug,))
 
 class Startup(models.Model):
     name = models.CharField(max_length=31, db_index=True)   # index automatically in the database
