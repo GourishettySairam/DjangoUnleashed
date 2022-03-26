@@ -5,7 +5,7 @@ from django.urls import reverse
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=63)
-    slug = models.SlugField(max_length=63, 
+    slug = models.SlugField(max_length=63,
                 help_text='A label for URL config',
                 unique_for_month='pub_date')
     text = models.TextField()

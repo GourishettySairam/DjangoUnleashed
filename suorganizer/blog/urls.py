@@ -7,7 +7,7 @@ urlpatterns = [
         name="blog_post_list"),
 
     url(r'^(?P<year>\d{4})/'
-    r'(?P<month>\d{1,2})'
+    r'(?P<month>\d{1,2})/'
     r'(?P<slug>[\w\-]+)/$',
         post_detail,
         {'parent_template': 'base.html'},
