@@ -16,7 +16,7 @@ class TagForm(SlugCleanMixin, forms.ModelForm):
     class Meta:
         model = Tag
         # fields = "__all__"
-        exclude = ['slug']
+        # exclude = ['slug']
         fields = ['name', 'slug']
     
     def clean_name(self):
