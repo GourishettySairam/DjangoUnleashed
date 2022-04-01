@@ -1,19 +1,18 @@
 {% extends parent_template|default:"organizer/base_organizer.html" %}
 
 {% block title %}
-{{ block.super }} - Update Tag
+{{ block.super }} - Create Blog Post
 {% endblock %}
 
 {% block content %}
-
     <div>
         <div>
-            <form action="{{ tag.get_update_url }}"
+            <form action="{{% url 'blog_post_create' %}}"
                 method="post">
                 {% csrf_token %}
                 {% form.as_p %}
                 <button type="submit">
-                    Update Tag
+                    Create Blog Post
                 </button>
             </form>
         </div>
