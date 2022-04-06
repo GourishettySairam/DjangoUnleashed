@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import PostList, post_detail
+from .views import PostList, post_detail, PostCreate
 
 urlpatterns = [
     url(r'^$', 
@@ -11,5 +11,9 @@ urlpatterns = [
     r'(?P<slug>[\w\-]+)/$',
         post_detail,
         {'parent_template': 'base.html'},
-        name="blog_post_detail")
+        name="blog_post_detail"),
+    url(r'^create/$',
+        PostCreate.as_view(),
+        name='blog_post_create'
+    )
 ]
