@@ -5,7 +5,7 @@ from django.http.response import HttpResponse, Http404, HttpResponseNotFound
 from .forms import TagForm
 from .models import Startup, Tag
 from django.template import loader, Context
-from djnago.views.generic import View
+from django.views.generic import View
 # Create your views here.
 
 def tag_list(request):
