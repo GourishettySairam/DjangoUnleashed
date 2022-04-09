@@ -3,9 +3,12 @@
         Write New Blog Post
     </a>
 </div>
-{% for post in post_list %}
+{% for post in post_list 
 <article>
     <header>
+        <p>
+            
+        </p>
         <h2>
             <a href="{{ post.get_absolute_url }}">
                 {{ post.title|title }}
