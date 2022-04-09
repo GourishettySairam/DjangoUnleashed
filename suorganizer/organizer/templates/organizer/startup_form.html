@@ -5,17 +5,16 @@
 {% endblock %}
 
 {% block content %}
+  <div>
     <div>
-        <div>
-            <form action="{{% url 'organizer_startup_create' %}}"
-                method="post">
-                {% csrf_token %}
-                {% form.as_p %}
-                <button type="submit">
-                    Create Startup
-                </button>
-            </form>
-        </div>
+      <form
+          action="{% url 'organizer_startup_create' %}"
+          method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">
+          Create Startup</button>
+      </form>
     </div>
-
+  </div>
 {% endblock %}
