@@ -2,7 +2,7 @@ from django.shortcuts import (get_object_or_404, redirect, render)
 
 from django.http.response import HttpResponse, Http404, HttpResponseNotFound
 
-from .forms import TagForm, StartupForm
+from .forms import NewsLinkForm, TagForm, StartupForm
 from .models import Startup, Tag
 from django.template import loader, Context
 from django.views.generic import View
@@ -78,3 +78,26 @@ class StartupCreate(View):
                 request,
                 self.template_name,
                 {'form': bound_form})
+
+class NewsLinkCreate(View):
+    form_class = NewsLinkForm
+    template_name = 'organizer/newslink_form.html'
+
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {'form': self.form_class()}
+        )
+    
+    def post(self, request):
+        bound_form = self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_newslink = bound_form.save()
+            return redirect(new_newslink)
+        else:
+            return render(
+                request,
+                self.template_name,
+                {'form': bound_form}
+            )
