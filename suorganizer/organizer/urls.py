@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from .views import tag_detail, tag_list, startup_list, startup_detail, tag_create, TagCreate, StartupCreate, NewsLinkCreate, NewsLinkUpdate, TagUpdate, StartupUpdate
+from .views import tag_detail, tag_list, startup_list, startup_detail, tag_create, TagCreate, StartupCreate, NewsLinkCreate, NewsLinkUpdate, TagUpdate, StartupUpdate, NewsLinkDelete
 from blog import urls as blog_urls
 
 urlpatterns = [
@@ -15,5 +15,6 @@ urlpatterns = [
     url(r'^newslink/create/$', NewsLinkCreate.as_view(), name='organizer_newslink_create'),
     url(r'^newslink/update/(?P<pk>\d+)/$',
         NewsLinkUpdate.as_view(),
-        name='organizer_newslink_update')
+        name='organizer_newslink_update'),
+    url(r'^newslink/delete/(?P<pk>\d+)/$', NewsLinkDelete.as_view(), name='organizer_newslink_delete')
 ]

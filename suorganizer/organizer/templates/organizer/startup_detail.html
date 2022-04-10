@@ -50,6 +50,11 @@
                         Edit Link
                     </a>
                 </li>
+                <li>
+                    <a href="{{ newslink.get_delete_url }}">
+                        Delete Link
+                    </a>
+                </li>
             </ul>
             <ul>
                 {% for newslink in startup.newslink_set.all %}

@@ -79,3 +79,9 @@ class NewsLink(models.Model):
             'organizer_newslink_update',
             kwargs={'pk': self.pk}
         )
+    
+    def get_delete_url(self):
+        return reverse(
+            'organizer_newslink_delete',
+            kwargs={'pk': self.pk}
+        )
