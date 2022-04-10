@@ -7,7 +7,7 @@ from .models import Startup, Tag, NewsLink
 from django.template import loader, Context
 from django.views.generic import View
 
-from .utils import ObjectCreateMixin
+from .utils import ObjectCreateMixin, ObjectUpdateMixin
 # Create your views here.
 
 def tag_list(request):
@@ -93,3 +93,17 @@ class NewsLinkUpdate(View):
                 self.template_name,
                 context
             )
+
+class TagUpdate(ObjectUpdateMixin, View):
+    form_class = TagForm
+    model = Tag
+    template_name = (
+        'organizer/tag_form_update.html'
+    )
+
+class StartupUpdate(ObjectUpdateMixin, View):
+    form_class = StartupForm
+    model = Startup
+    template_name = (
+        'organizer/startup_form_update.html'
+    )

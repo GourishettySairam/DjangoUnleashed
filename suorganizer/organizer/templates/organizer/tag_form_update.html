@@ -11,7 +11,7 @@
             <form action="{{ tag.get_update_url }}"
                 method="post">
                 {% csrf_token %}
-                {% form.as_p %}
+                {{ form.as_p }}
                 <button type="submit">
                     Update Tag
                 </button>

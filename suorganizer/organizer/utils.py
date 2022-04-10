@@ -35,7 +35,7 @@ class ObjectUpdateMixin:
             self.model, slug__iexact=slug
         )
         context = {
-            'form': self.form_class(instace=obj),
+            'form': self.form_class(instance=obj),
             self.model.__name__.lower(): obj
         }
         return render(
