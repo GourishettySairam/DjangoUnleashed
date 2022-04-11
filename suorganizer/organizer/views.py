@@ -118,6 +118,15 @@ class StartupUpdate(ObjectUpdateMixin, View):
         'organizer/startup_form_update.html'
     )
 
+class StartupDelete(ObjectDeleteMixin, View):
+    model = Startup
+    success_url = reverse_lazy(
+        'organizer_startup_list'
+    )
+    template_name = (
+        'organizer/startup_confirm_delete.html'
+    )
+
 class NewsLinkDelete(View):
     
     def get(self, request, pk):
