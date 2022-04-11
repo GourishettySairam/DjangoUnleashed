@@ -1,13 +1,14 @@
 from django.shortcuts import (get_object_or_404, redirect, render)
 
 from django.http.response import HttpResponse, Http404, HttpResponseNotFound
+from django.urls import reverse_lazy
 
 from .forms import NewsLinkForm, TagForm, StartupForm
 from .models import Startup, Tag, NewsLink
 from django.template import loader, Context
 from django.views.generic import View
 
-from .utils import ObjectCreateMixin, ObjectUpdateMixin
+from .utils import ObjectCreateMixin, ObjectDeleteMixin, ObjectUpdateMixin
 # Create your views here.
 
 def tag_list(request):
@@ -99,6 +100,15 @@ class TagUpdate(ObjectUpdateMixin, View):
     model = Tag
     template_name = (
         'organizer/tag_form_update.html'
+    )
+
+class TagDelete(ObjectDeleteMixin, View):
+    model = Tag
+    success_url = reverse_lazy(
+        'organizer_tag_list'
+    )
+    template_name = (
+        'organizer/tag_confirm_delete.html'
     )
 
 class StartupUpdate(ObjectUpdateMixin, View):

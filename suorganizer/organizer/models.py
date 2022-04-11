@@ -19,6 +19,11 @@ class Tag(models.Model):
         return reverse(
             'organizer_tag_update', kwargs={'slug': self.slug}
         )
+    
+    def get_delete_url(self):
+        return reverse(
+            'organizer_tag_delete', kwargs={'slug': self.slug}
+        )
 
 class Startup(models.Model):
     name = models.CharField(max_length=31, db_index=True)   # index automatically in the database
