@@ -20,10 +20,12 @@ class Post(models.Model):
     # another many-to-many relationship
     tags = models.ManyToManyField(
         Tag, 
+        blank=True,
         related_name='blog_posts'
     )
     startups = models.ManyToManyField(
-        Startup, 
+        Startup,
+        blank=True, 
         related_name='blog_posts'
     )
 

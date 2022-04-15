@@ -38,7 +38,7 @@ class Startup(models.Model):
     # This is a many-to-many relationship. 
     # Similarly, each blog post will be 
     # associated with tags via a many-to-many relationship
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return self.name
