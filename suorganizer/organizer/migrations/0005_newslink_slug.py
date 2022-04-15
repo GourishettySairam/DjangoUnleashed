@@ -4,7 +4,7 @@ from email.policy import default
 from django.db import migrations, models
 from django.utils.text import slugify
 
-from suorganizer.organizer.models import NewsLink
+from organizer.models import NewsLink
 
 SLUG_LENGTH = 63
 

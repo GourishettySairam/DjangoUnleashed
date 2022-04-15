@@ -64,6 +64,7 @@ class NewsLink(models.Model):
     title = models.CharField(max_length=63)
     pub_date = models.DateField('date published')
     link = models.URLField(max_length=255)
+    slug = models.SlugField(max_length=63)
 
     #  A one-to-many relationship pointing news links to startups
     #  A news link may belong to only one startup, 
@@ -80,6 +81,7 @@ class NewsLink(models.Model):
         verbose_name = "news article"   # to change name of class from news link to news article
         ordering = ["-pub_date"]
         get_latest_by = "pub_date"
+        unique_together = ('slug', 'startup')
 
     def get_absolute_url(self):
         return self.startup.get_absolute_url()
