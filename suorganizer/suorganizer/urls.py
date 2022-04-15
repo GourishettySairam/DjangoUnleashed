@@ -19,9 +19,11 @@ from django.conf.urls import include, url
 
 from organizer import urls as organizer_urls
 from .views import redirect_root
+from contact import urls as contact_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^', include(organizer_urls)),
+    url(r'^contact/', include(contact_urls)),
     url(r'^$', redirect_root) 
 ]
