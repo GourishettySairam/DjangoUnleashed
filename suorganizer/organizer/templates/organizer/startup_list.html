@@ -31,5 +31,9 @@
     {% empty %}
       <li><em>No Startups Available</em></li>
     {% endfor %}
+    <li>
+      Page {{ startup_list.number }}
+      of {{ paginator.num_pages }}
+    </li>
   </ul>
 {% endblock %}
