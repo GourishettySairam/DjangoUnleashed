@@ -9,6 +9,8 @@ from django.template import loader, Context
 from django.views.generic import View
 
 from .utils import ObjectCreateMixin, ObjectDeleteMixin, ObjectUpdateMixin
+from django.core.paginator import Paginator
+
 # Create your views here.
 
 def tag_list(request):
@@ -18,8 +20,20 @@ def tag_detail(request, slug):
     tag = get_object_or_404(Tag, slug__iexact=slug)
     return render(request, 'organizer/tag_detail.html', {'tag': tag})
 
-def startup_list(request):
-    return render(request, 'organizer/startup_list.html', {'startup_list': Startup.objects.all()})
+class StartupList(View):
+    paginate_by = 5
+    template_name = 'organizer/startup_list.html'
+
+    def get(self, request):
+        startups = Startup.objects.all()
+        paginator = Paginator(startups, self.paginate_by)
+        page = paginator.page(1)
+        context = {'startup_list': page}
+        return render(
+            request,
+            self.template_name,
+            context
+        )
 
 def startup_detail(request, slug):
     startup = get_object_or_404(Startup, slug__iexact=slug)
