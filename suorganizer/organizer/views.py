@@ -16,6 +16,18 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def tag_list(request):
     return render(request, 'organizer/tag_list.html', {'tag_list': Tag.objects.all()})
 
+class TagList(View):
+    template_name = 'organizer/tag_list.html'
+
+    def get(self, request, page_number=None):
+        tags = Tag.objects.all()
+        context = {
+            'tag_list': tags,
+        }
+        return render(
+            request, self.template_name, context
+        )
+
 def tag_detail(request, slug):
     tag = get_object_or_404(Tag, slug__iexact=slug)
     return render(request, 'organizer/tag_detail.html', {'tag': tag})
@@ -70,8 +82,6 @@ class StartupList(View):
             self.template_name,
             context
         )
-
-# Example 14.36 to-do
 
 def startup_detail(request, slug):
     startup = get_object_or_404(Startup, slug__iexact=slug)
