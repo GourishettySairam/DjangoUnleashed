@@ -26,6 +26,9 @@ from .views import redirect_root
 from contact import urls as contact_urls
 from blog import urls as blog_urls
 
+from django.contrib.flatpages import \
+    urls as flatpage_urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^blog/', include(blog_urls)),
@@ -33,5 +36,6 @@ urlpatterns = [
     url(r'^startup/', include(startup_urls)),
     url(r'^tag/', include(tag_urls)),
     url(r'^contact/', include(contact_urls)),
+    url(r'^', include(flatpage_urls)),
     url(r'^$', redirect_root)
 ]
