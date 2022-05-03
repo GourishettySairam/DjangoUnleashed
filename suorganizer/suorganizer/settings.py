@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'organizer',
     'blog',
     'contact',
-    'django.contrib.sites'
+    'django.contrib.sites',
+    'core',
 ]
 
 MIDDLEWARE = [
