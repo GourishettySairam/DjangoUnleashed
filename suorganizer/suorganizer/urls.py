@@ -33,5 +33,5 @@ urlpatterns = [
     url(r'^startup/', include(startup_urls)),
     url(r'^tag/', include(tag_urls)),
     url(r'^contact/', include(contact_urls)),
-    url(r'^$', redirect_root) 
+    url(r'^$', redirect_root)
 ]
