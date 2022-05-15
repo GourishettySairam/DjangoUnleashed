@@ -8,7 +8,7 @@ from .models import Startup, Tag, NewsLink
 from django.template import loader, Context
 from django.views.generic import View
 
-from .utils import ObjectCreateMixin, ObjectDeleteMixin, ObjectUpdateMixin
+from .utils import ObjectCreateMixin, ObjectDeleteMixin, ObjectUpdateMixin, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
@@ -84,6 +84,18 @@ class TagPageList(View):
 def tag_detail(request, slug):
     tag = get_object_or_404(Tag, slug__iexact=slug)
     return render(request, 'organizer/tag_detail.html', {'tag': tag})
+
+class StartupDetail(DetailView):
+    context_object_name = 'startup'
+    model = Startup
+    template_name = ('organizer/startup_detail.html')
+
+class TagDetail(DetailView):
+    context_object_name = 'tag'
+    model = Tag
+    template_name = (
+        'organizer/tag_detail.html'
+    )
 
 class StartupList(View):
     page_kwarg = 'page'
