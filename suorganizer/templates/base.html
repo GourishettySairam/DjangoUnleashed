@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 {% load flatpages %}
 {% get_flatpages as flatpages %}
 <!DOCTYPE html>
@@ -13,7 +13,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css"
-            href="{% static 'site/style.css' %}">
+      href="{% static 'site/normalize.css' %}">
+    <link rel="stylesheet" type="text/css"
+      href="{% static 'site/skeleton.css' %}">
+    <link rel="stylesheet" type="text/css"
+      href="{% static 'site/style.css' %}">
         {% block head %}
         {% endblock %}
     </head>
