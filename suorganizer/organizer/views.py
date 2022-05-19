@@ -10,6 +10,7 @@ from django.views.generic import View
 
 from .utils import ObjectCreateMixin, ObjectDeleteMixin, ObjectUpdateMixin, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import DetailView, View
 
 # Create your views here.
 
