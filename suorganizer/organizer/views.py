@@ -86,16 +86,10 @@ def tag_detail(request, slug):
     return render(request, 'organizer/tag_detail.html', {'tag': tag})
 
 class StartupDetail(DetailView):
-    context_object_name = 'startup'
     model = Startup
-    template_name = ('organizer/startup_detail.html')
 
 class TagDetail(DetailView):
-    context_object_name = 'tag'
     model = Tag
-    template_name = (
-        'organizer/tag_detail.html'
-    )
 
 class StartupList(View):
     page_kwarg = 'page'

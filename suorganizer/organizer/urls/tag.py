@@ -15,3 +15,5 @@ urlpatterns = [
     url(r'^(?P<slug>[\w\-]+)/update/$', TagUpdate.as_view(), name='organizer_tag_update'),
     url(r'^(?P<slug>[\w\-]+)/delete/$', TagDelete.as_view(), name='organizer_tag_delete'),
 ]
+
+# To Do: 17.2.3 Anticipating Behavior Overrides
