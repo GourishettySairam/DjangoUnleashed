@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import View
+from django.views.generic import View, ListView, CreateView
 from jupyterlab_server import slugify
 from .models import Post
 
@@ -79,7 +79,7 @@ class PostDelete(View):
         return redirect('blog_post_list')
 
 
-class PostCreate(View):
+class PostCreate(CreateView):
     form_class = PostForm
     template_name = 'blog/post_form.html'
 
@@ -101,7 +101,7 @@ class PostCreate(View):
                 {'form': bound_form})
 
 
-class PostList(View):
+class PostList(ListView):
     template_name = ''
 
     def get(self, request):
