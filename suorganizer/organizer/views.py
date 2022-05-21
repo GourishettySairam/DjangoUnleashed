@@ -269,3 +269,17 @@ class NewsLinkDelete(View):
         startup = newslink.startup
         newslink.delete()
         return redirect(startup)
+
+def model_list(request, model):
+    context_object_name = '{}_list'.format(
+        model._meta.model_name
+    )
+    context = {
+        context_object_name: model.objects.all()
+    }
+    template_name = (
+        'organizer/{}_list.html'.format(
+            model._meta.model_name
+        )
+    )
+    return render(request, template_name, context)
