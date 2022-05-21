@@ -8,9 +8,9 @@ from .models import Startup, Tag, NewsLink
 from django.template import loader, Context
 from django.views.generic import View
 
-from .utils import ObjectCreateMixin, ObjectDeleteMixin, ObjectUpdateMixin
+from .utils import ObjectDeleteMixin, ObjectUpdateMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 
 # Create your views here.
 
@@ -161,17 +161,17 @@ def tag_create(request):
             {'form': form}
         )
 
-class TagCreate(ObjectCreateMixin, View):
+class TagCreate(CreateView, View):
     form_class = TagForm
     template_name = 'organizer/tag_form.html'
 
 
-class StartupCreate(ObjectCreateMixin, View):
+class StartupCreate(CreateView, View):
     form_class = StartupForm
     template_name = 'organizer/startup_form.html'
 
 
-class NewsLinkCreate(ObjectCreateMixin, View):
+class NewsLinkCreate(CreateView, View):
     form_class = NewsLinkForm
     template_name = 'organizer/newslink_form.html'
 
