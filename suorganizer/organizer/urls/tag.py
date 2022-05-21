@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from ..views import TagDelete, TagList, TagPageList, tag_detail, tag_list, tag_create, TagCreate, TagUpdate
-from ..utils import DetailView
+# from ..utils import DetailView
 from ..models import Tag
+from django.views.generic import DetailView
 
 urlpatterns = [
     url(r'^$', TagList.as_view(), name='organizer_tag_list'),
@@ -15,5 +16,3 @@ urlpatterns = [
     url(r'^(?P<slug>[\w\-]+)/update/$', TagUpdate.as_view(), name='organizer_tag_update'),
     url(r'^(?P<slug>[\w\-]+)/delete/$', TagDelete.as_view(), name='organizer_tag_delete'),
 ]
-
-# To Do: 17.2.3 Anticipating Behavior Overrides

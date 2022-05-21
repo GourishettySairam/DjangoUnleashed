@@ -8,9 +8,9 @@ from .models import Startup, Tag, NewsLink
 from django.template import loader, Context
 from django.views.generic import View
 
-from .utils import ObjectCreateMixin, ObjectDeleteMixin, ObjectUpdateMixin, DetailView
+from .utils import ObjectCreateMixin, ObjectDeleteMixin, ObjectUpdateMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import DetailView, View
+from django.views.generic import DetailView
 
 # Create your views here.
 
