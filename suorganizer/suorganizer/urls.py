@@ -25,6 +25,7 @@ from organizer.urls import  (
 from .views import redirect_root
 from contact import urls as contact_urls
 from blog import urls as blog_urls
+from django.views.generic import RedirectView
 
 from django.contrib.flatpages import \
     urls as flatpage_urls
@@ -37,5 +38,8 @@ urlpatterns = [
     url(r'^tag/', include(tag_urls)),
     url(r'^contact/', include(contact_urls)),
     url(r'^', include(flatpage_urls)),
-    url(r'^$', redirect_root)
+    url(r'^$', RedirectView.as_view(
+        pattern_name='blog_post_list',
+        permanent=False
+    ))
 ]
