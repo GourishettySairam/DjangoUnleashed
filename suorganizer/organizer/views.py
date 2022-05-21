@@ -8,9 +8,9 @@ from .models import Startup, Tag, NewsLink
 from django.template import loader, Context
 from django.views.generic import View
 
-from .utils import ObjectDeleteMixin, ObjectUpdateMixin
+# from .utils import ObjectDeleteMixin, ObjectUpdateMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, DeleteView, UpdateView
 
 # Create your views here.
 
@@ -161,19 +161,19 @@ def tag_create(request):
             {'form': form}
         )
 
-class TagCreate(CreateView, View):
+class TagCreate(CreateView):
     form_class = TagForm
-    template_name = 'organizer/tag_form.html'
+    model = Tag
 
 
-class StartupCreate(CreateView, View):
+class StartupCreate(CreateView):
     form_class = StartupForm
-    template_name = 'organizer/startup_form.html'
+    model = Startup
 
 
-class NewsLinkCreate(CreateView, View):
+class NewsLinkCreate(CreateView):
     form_class = NewsLinkForm
-    template_name = 'organizer/newslink_form.html'
+    model = NewsLink
 
 class NewsLinkUpdate(View):
     form_class = NewsLinkForm
@@ -217,36 +217,30 @@ class NewsLinkUpdate(View):
                 context
             )
 
-class TagUpdate(ObjectUpdateMixin, View):
+class TagUpdate(UpdateView, View):
     form_class = TagForm
     model = Tag
     template_name = (
         'organizer/tag_form_update.html'
     )
 
-class TagDelete(ObjectDeleteMixin, View):
+class TagDelete(DeleteView, View):
     model = Tag
     success_url = reverse_lazy(
         'organizer_tag_list'
     )
-    template_name = (
-        'organizer/tag_confirm_delete.html'
-    )
 
-class StartupUpdate(ObjectUpdateMixin, View):
+class StartupUpdate(UpdateView, View):
     form_class = StartupForm
     model = Startup
     template_name = (
         'organizer/startup_form_update.html'
     )
 
-class StartupDelete(ObjectDeleteMixin, View):
+class StartupDelete(DeleteView, View):
     model = Startup
     success_url = reverse_lazy(
         'organizer_startup_list'
-    )
-    template_name = (
-        'organizer/startup_confirm_delete.html'
     )
 
 class NewsLinkDelete(View):
