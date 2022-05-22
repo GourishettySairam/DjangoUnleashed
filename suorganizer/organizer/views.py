@@ -243,7 +243,7 @@ class StartupDelete(DeleteView, View):
         'organizer_startup_list'
     )
 
-class NewsLinkDelete(View):
+class NewsLinkDelete(DeleteView):
     
     def get(self, request, pk):
         newslink = get_object_or_404(
@@ -263,6 +263,11 @@ class NewsLinkDelete(View):
         startup = newslink.startup
         newslink.delete()
         return redirect(startup)
+    
+    def get_success_url(self):
+        return (
+            self.object.startup.get_absolute_url()
+        )
 
 def model_list(request, model):
     context_object_name = '{}_list'.format(
