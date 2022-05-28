@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import PostList, post_detail, PostCreate, PostUpdate, PostDelete
+from .views import PostArchiveYear, PostList, post_detail, PostCreate, PostUpdate, PostDelete
 
 urlpatterns = [
     url(r'^$', 
@@ -27,5 +27,8 @@ urlpatterns = [
         r'delete/$',
         PostDelete.as_view(),
         name="blog_post_delete"
-    )
+    ),
+    url(r'^(?P<year>\d{4})/$',
+        PostArchiveYear.as_view(),
+        name='blog_post_archive_year'),
 ]

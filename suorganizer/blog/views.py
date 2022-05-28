@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import View, ListView, CreateView
+from django.views.generic import View, ListView, CreateView, YearArchiveView
 from jupyterlab_server import slugify
 from .models import Post
 
@@ -115,3 +115,8 @@ def post_detail(request, year, month, slug, parent_template=None):
         slug=slug
     )
     return render(request, 'blog/post_detail.html', {'post': post, 'parent_template': parent_template})
+
+class PostArchiveYear(YearArchiveView):
+    model = Post
+    date_field = 'pub_date'
+    make_object_list: True
