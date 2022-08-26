@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import View, ListView, CreateView, YearArchiveView
+from django.views.generic import View, ListView, CreateView, YearArchiveView, MonthArchiveView
 from jupyterlab_server import slugify
 from .models import Post
 
@@ -120,3 +120,8 @@ class PostArchiveYear(YearArchiveView):
     model = Post
     date_field = 'pub_date'
     make_object_list: True
+
+class PostArchiveMonth(MonthArchiveView):
+    model = Post
+    date = 'pub_date'
+    month_format = '%m'
