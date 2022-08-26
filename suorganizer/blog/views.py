@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import View, ListView, CreateView, YearArchiveView, MonthArchiveView
+from django.views.generic import View, ListView, CreateView, YearArchiveView, MonthArchiveView, ArchiveIndexView
 from jupyterlab_server import slugify
 from .models import Post
 
@@ -101,8 +101,15 @@ class PostCreate(CreateView):
                 {'form': bound_form})
 
 
-class PostList(ListView):
-    template_name = ''
+class PostList(ArchiveIndexView):
+    template_name = 'blog/post_list.html'
+    allow_empty = True
+    allow_future = True
+    context_object_name = "post_list"
+    date_field = "pub_date"
+    make_object_list = True
+    model = Post
+    paginate_by = 5
 
     def get(self, request):
         return render(request, self.template_name, {'post_list': Post.objects.all()})
