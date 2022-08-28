@@ -20,17 +20,9 @@ from .utils import PageLinksMixin
 def tag_list(request):
     return render(request, 'organizer/tag_list.html', {'tag_list': Tag.objects.all()})
 
-class TagList(View):
-    template_name = 'organizer/tag_list.html'
-
-    def get(self, request):
-        tags = Tag.objects.all()
-        context = {
-            'tag_list': tags,
-        }
-        return render(
-            request, self.template_name, context
-        )
+class TagList(PageLinksMixin, ListView):
+    paginate_by = 5
+    model = Tag
     
 class TagPageList(View):
         paginate_by = 5
