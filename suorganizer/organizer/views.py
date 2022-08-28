@@ -10,7 +10,9 @@ from django.views.generic import View
 
 # from .utils import ObjectDeleteMixin, ObjectUpdateMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic import DetailView, CreateView, DeleteView
+
+from core.utils import UpdateView
 
 # Create your views here.
 
@@ -175,54 +177,16 @@ class NewsLinkCreate(CreateView):
     form_class = NewsLinkForm
     model = NewsLink
 
-class NewsLinkUpdate(View):
+class NewsLinkUpdate(UpdateView):
     form_class = NewsLinkForm
-    template_name = (
-        'organizer/newslink_form_update.html'
-    )
+    model = NewsLink
+    template_name_suffix = '_form_update'
 
-    def get(self, request, pk):
-        newslink = get_object_or_404(
-            NewsLink, pk=pk
-        )
 
-        context = {
-            'form': self.form_class(
-                instance=newslink
-            ),
-            'newslink': newslink,
-        }
-        return render(
-            request, self.template_name, context
-        )
-    
-    def post(self, request, pk):
-        newslink = get_object_or_404(
-            NewsLink, pk=pk
-        )
-        bound_form = self.form_class(
-            request.POST, instance=newslink
-        )
-        if bound_form.is_valid():
-            new_newslink = bound_form.save()
-            return redirect(new_newslink)
-        else:
-            context = {
-                'form': bound_form,
-                'news_link': newslink
-            }
-            return render(
-                request,
-                self.template_name,
-                context
-            )
-
-class TagUpdate(UpdateView, View):
+class TagUpdate(UpdateView):
     form_class = TagForm
     model = Tag
-    template_name = (
-        'organizer/tag_form_update.html'
-    )
+    template_name_suffix = "_form_update"
 
 class TagDelete(DeleteView, View):
     model = Tag
@@ -230,12 +194,10 @@ class TagDelete(DeleteView, View):
         'organizer_tag_list'
     )
 
-class StartupUpdate(UpdateView, View):
+class StartupUpdate(UpdateView):
     form_class = StartupForm
     model = Startup
-    template_name = (
-        'organizer/startup_form_update.html'
-    )
+    template_name_suffix = "_form_update"
 
 class StartupDelete(DeleteView, View):
     model = Startup
