@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import View, ListView, CreateView, YearArchiveView, MonthArchiveView, ArchiveIndexView
+from django.views.generic import View, ListView, CreateView, YearArchiveView, MonthArchiveView, ArchiveIndexView, DateDetailView
 from jupyterlab_server import slugify
 from .models import Post
 
@@ -114,14 +114,22 @@ class PostList(ArchiveIndexView):
     def get(self, request):
         return render(request, self.template_name, {'post_list': Post.objects.all()})
 
-@require_http_methods(['HEAD', 'GET'])
-def post_detail(request, year, month, slug, parent_template=None):
-    post = get_object_or_404(Post,
-        pub_date__year=year,
-        pub_date__month=month,
-        slug=slug
-    )
-    return render(request, 'blog/post_detail.html', {'post': post, 'parent_template': parent_template})
+
+class PostDetail(DateDetailView):
+    date_field = 'pub_date'
+    model = Post
+    month_format = '%m'
+
+    def get_day(self):
+        return '1'
+    
+    def _make_single_date_lookup(self, date):
+        date_field = self.get_date_field()
+        return {
+            date_field + '__year': date.year,
+            date_field + '__month': date.month
+        }
+
 
 class PostArchiveYear(YearArchiveView):
     model = Post

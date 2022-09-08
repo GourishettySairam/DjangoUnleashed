@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import PostArchiveMonth, PostArchiveYear, PostList, post_detail, PostCreate, PostUpdate, PostDelete
+from .views import PostArchiveMonth, PostArchiveYear, PostDetail, PostList, post_detail, PostCreate, PostUpdate, PostDelete
 
 urlpatterns = [
     url(r'^$', 
@@ -12,8 +12,7 @@ urlpatterns = [
     url(r'^(?P<year>\d{4})/'
     r'(?P<month>\d{1,2})/'
     r'(?P<slug>[\w\-]+)/$',
-        post_detail,
-        {'parent_template': 'base.html'},
+    PostDetail.as_view(),
         name="blog_post_detail"),
     url(r'^(?P<year>\d{4})/'
         r'(?P<month>\d{1,2})/'
