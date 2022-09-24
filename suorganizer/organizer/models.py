@@ -59,6 +59,13 @@ class Startup(models.Model):
         return reverse(
             'organizer_startup_delete', kwargs={'slug': self.slug}
         )
+    
+    def get_newslink_create_url(self):
+        return reverse(
+            'organizer_newslink_create',
+            kwargs={'startup_slug': self.slug}
+        )
+    
 
 class NewsLink(models.Model):
     title = models.CharField(max_length=63)
@@ -89,11 +96,17 @@ class NewsLink(models.Model):
     def get_update_url(self):
         return reverse(
             'organizer_newslink_update',
-            kwargs={'pk': self.pk}
+            kwargs={
+                "startup_slug": self.startup.slug,
+                "newslink_slug": self.slug
+            }
         )
     
     def get_delete_url(self):
         return reverse(
             'organizer_newslink_delete',
-            kwargs={'pk': self.pk}
+            kwargs={
+                "startup_slug": self.startup.slug,
+                "newslink_slug": self.slug
+            }
         )

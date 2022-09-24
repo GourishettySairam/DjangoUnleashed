@@ -15,7 +15,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import DetailView, CreateView, DeleteView, ListView
 
 from core.utils import UpdateView
-from .utils import PageLinksMixin
+from .utils import (PageLinksMixin, NewsLinkGetObjectMixin, StartupContextMixin)
 
 # Create your views here.
 
@@ -122,13 +122,14 @@ class StartupCreate(CreateView):
     model = Startup
 
 
-class NewsLinkCreate(CreateView):
+class NewsLinkCreate(NewsLinkGetObjectMixin, StartupContextMixin, CreateView):
     form_class = NewsLinkForm
     model = NewsLink
 
-class NewsLinkUpdate(UpdateView):
+class NewsLinkUpdate(NewsLinkGetObjectMixin, StartupContextMixin, UpdateView):
     form_class = NewsLinkForm
     model = NewsLink
+    slug_url_kwarg = "newslink_slug"
     template_name_suffix = '_form_update'
 
 
@@ -154,7 +155,9 @@ class StartupDelete(DeleteView, View):
         'organizer_startup_list'
     )
 
-class NewsLinkDelete(DeleteView):
+class NewsLinkDelete(StartupContextMixin, DeleteView):
+    model = NewsLink
+    slug_url_kwarg = "newslink_slug"
     
     def get(self, request, pk):
         newslink = get_object_or_404(
