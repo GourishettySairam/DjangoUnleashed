@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import PostArchiveMonth, PostArchiveYear, PostDetail, PostList, post_detail, PostCreate, PostUpdate, PostDelete
+from .views import PostArchiveMonth, PostArchiveYear, PostDetail, PostList, PostCreate, PostUpdate, PostDelete
 
 urlpatterns = [
     url(r'^$', 
