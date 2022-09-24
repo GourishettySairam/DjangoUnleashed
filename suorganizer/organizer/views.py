@@ -2,6 +2,8 @@ from django.shortcuts import (get_object_or_404, redirect, render)
 
 from django.http.response import HttpResponse, Http404, HttpResponseNotFound
 from django.urls import reverse, reverse_lazy
+from blog.forms import PostForm
+
 
 from .forms import NewsLinkForm, TagForm, StartupForm
 from .models import Startup, Tag, NewsLink

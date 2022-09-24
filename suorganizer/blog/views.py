@@ -5,7 +5,7 @@ from .models import Post
 
 from django.views.decorators.http import require_http_methods
 from .forms import PostForm
-from .utils import PostGetMixin
+from .utils import PostGetMixin, DateObjectMixin
 from core.utils import UpdateView
 from django.urls import reverse, reverse_lazy
 
@@ -69,3 +69,22 @@ class PostArchiveMonth(MonthArchiveView):
     model = Post
     date = 'pub_date'
     month_format = '%m'
+
+
+class PostDelete(DateObjectMixin, DeleteView):
+    allow_future = True
+    date_field = 'pub_date'
+    model = Post
+    success_url = reverse_lazy('blog_post_list')
+
+class PostDetail(DateObjectMixin, DetailView):
+    allow_future = True
+    date_field = "pub_date"
+    model = Post
+
+class PostUpdate(DateObjectMixin, UpdateView):
+    allow_future = True
+    date_field = "pub_date"
+    model = Post
+    form_class = PostForm
+
