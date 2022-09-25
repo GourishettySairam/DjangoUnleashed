@@ -1,6 +1,7 @@
 from django import forms
 from .models import Tag, NewsLink, Startup
 from django.core.exceptions import ValidationError
+from django.forms.widgets import HiddenInput
 
 class SlugCleanMixin:
     """Mixin class for slug cleaning method"""
@@ -32,3 +33,9 @@ class StartupForm(SlugCleanMixin, forms.ModelForm):
     class Meta:
         model = Startup
         fields = "__all__"
+
+class NewsLinkForm(SlugCleanMixin, forms.ModelForm):
+    class Meta:
+        model = NewsLink
+        fields = "__all__"
+        widgets = {'startup': HiddenInput() }
