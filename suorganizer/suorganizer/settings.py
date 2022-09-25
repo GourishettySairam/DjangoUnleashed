@@ -49,6 +49,11 @@ INSTALLED_APPS = [
     'core',
 ]
 
+MIDDLEWARE_CLASSES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+)
+
 MIDDLEWARE = [
     # 'kolo.middleware.KoloMiddleware',
     'django.middleware.security.SecurityMiddleware',
