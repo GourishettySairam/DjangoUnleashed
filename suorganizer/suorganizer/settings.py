@@ -42,11 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
+    'user',
     'organizer',
     'blog',
     'contact',
     'django.contrib.sites',
-    'core',
 ]
 
 MIDDLEWARE_CLASSES = (
@@ -132,34 +133,34 @@ verbose = (
     "[%(name)s:%(lineno)s] %(message)s"
 )
 
-LOGGING = {
-    'version': 1,
-    'disable_exising_loggers': False,
-    'filters': {
-        'remove_migration_sql': {
-            '()': ManagementFilter,
-        },
-    },
-    'handlers': {
-        'console': {
-            'filters': ['remove_migration_sql'],
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'formatters': {
-        'verbose': {
-            'format': verbose,
-            'datefmt': "%Y-%b-%d %H:%M:%S"
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'formatter': 'verbose'
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_exising_loggers': False,
+#     'filters': {
+#         'remove_migration_sql': {
+#             '()': ManagementFilter,
+#         },
+#     },
+#     'handlers': {
+#         'console': {
+#             'filters': ['remove_migration_sql'],
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'formatters': {
+#         'verbose': {
+#             'format': verbose,
+#             'datefmt': "%Y-%b-%d %H:%M:%S"
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#             'formatter': 'verbose'
+#         },
+#     },
+# }
 
 
 # Internationalization
@@ -174,6 +175,10 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LOGIN_URL = "login"
+
+LOGOUT_URL = "logout"
 
 
 # Static files (CSS, JavaScript, Images)

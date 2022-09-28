@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
+from django.contrib.auth import urls as auth_urls
 
 from organizer.urls import  (
     startup as startup_urls,
@@ -25,6 +26,7 @@ from .views import redirect_root
 from contact import urls as contact_urls
 from blog import urls as blog_urls
 from django.views.generic import RedirectView, TemplateView
+from user import urls as user_urls
 
 urlpatterns = [
     url(r'^about/$', TemplateView.as_view(
@@ -39,4 +41,8 @@ urlpatterns = [
         pattern_name='blog_post_list',
         permanent=False
     )),
+    url(r'^user/', include(user_urls,
+        namespace='dj-auth'
+        )
+    ),
 ]
