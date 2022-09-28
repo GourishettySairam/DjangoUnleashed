@@ -22,19 +22,19 @@
 
     <body>
         <div>
-            {% if user.is_authenticated %}
-                <li>
-                    <a href="{% url 'dj-auth:logout' %}">
-                        Log Out
-                    </a>
-                </li>
-            {% else %}
-                <li>
-                    <a href="{% url 'dj-auth:login' %}">
-                        Log In
-                    </a>
-                </li>
-            {% endif %}
+            <div class="status row">
+                <div class="offset-by-eight four columns">
+                  <ul class="inline">
+                    {% if user.is_authenticated %}
+                      <li><a href="{% url 'dj-auth:logout' %}">
+                        Log Out</a></li>
+                    {% else %}
+                      <li><a href="{% url 'dj-auth:login' %}">
+                        Log In</a></li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
             <header>
                 <img
                    src="{% static 'site/logo.png' %}" alt="Site Logo">
