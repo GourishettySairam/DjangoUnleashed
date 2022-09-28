@@ -176,9 +176,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_URL = "login"
+from django.urls import reverse_lazy
 
-LOGOUT_URL = "logout"
+LOGIN_REDIRECT_URL = reverse_lazy('blog_post_list')
+LOGIN_URL = reverse_lazy('dj-auth:login')
+LOGOUT_URL = reverse_lazy('dj-auth:logout')
 
 
 # Static files (CSS, JavaScript, Images)
