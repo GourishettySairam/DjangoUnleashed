@@ -17,6 +17,12 @@ from django.views.generic import DetailView, CreateView, DeleteView, ListView
 from core.utils import UpdateView
 from .utils import (PageLinksMixin, NewsLinkGetObjectMixin, StartupContextMixin)
 
+from django.contrib.auth.decorators import \
+    login_required, permission_required, user_passes_test
+from django.utils.decorators import \
+    method_decorator
+from django.contrib.auth import PermissionDenied
+
 # Create your views here.
 
 def tag_list(request):
@@ -112,9 +118,28 @@ def tag_create(request):
             {'form': form}
         )
 
+def in_contrib_group(user):
+    if user.groups.filter(
+        name='contributors'
+    ).exists():
+        return True
+    else:
+        raise PermissionDenied
+
 class TagCreate(CreateView):
     form_class = TagForm
     model = Tag
+
+    @method_decorator(
+        permission_required(
+            'organizer.add_tag',
+            raise_exception=True
+        )
+    )
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(
+            request, *args, **kwargs
+        )
 
 
 class StartupCreate(CreateView):
