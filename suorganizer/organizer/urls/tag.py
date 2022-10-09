@@ -3,11 +3,13 @@ from ..views import TagDelete, TagList, TagPageList, model_list, tag_detail, tag
 # from ..utils import DetailView
 from ..models import Tag
 from django.views.generic import DetailView
+from django.contrib.auth.decorators import \
+    login_required
 
 urlpatterns = [
     url(r'^$', model_list, {'model': Tag}, name='organizer_tag_list'),
     url(r'^(?P<page_number>\d+)/$', TagPageList.as_view(), name='organizer_tag_page'),
-    url(r'^create/$', TagCreate.as_view(), name='organizer_tag_create'),
+    url(r'^create/$', login_required(TagCreate.as_view()), name='organizer_tag_create'),
     url(r'^(?P<slug>[\w\-]+)/$', DetailView.as_view(
         context_object_name='tag', model=Tag, template_name=(
             'organizer/tag_detail.html'
