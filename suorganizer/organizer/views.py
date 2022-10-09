@@ -131,9 +131,8 @@ class TagCreate(CreateView):
     model = Tag
 
     @method_decorator(
-        permission_required(
-            'organizer.add_tag',
-            raise_exception=True
+        user_passes_test(
+            in_contrib_group
         )
     )
     def dispatch(self, request, *args, **kwargs):
