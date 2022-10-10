@@ -18,7 +18,7 @@ def custom_login_required(view):
 def require_authenticated_permission(permission):
     # view must be a function
 
-    def decorator(view):
+    def decorator(cls):
         check_auth = (
             method_decorator(login_required)
         )
@@ -30,10 +30,10 @@ def require_authenticated_permission(permission):
             )
         )
 
-        decorated_view = (
-            check_auth(check_perm(view))
+        cls.dispatch = (
+            check_auth(check_perm(cls.dispatch))
         )
-        return decorated_view
+        return cls
     return decorator
 
 def class_login_required(cls):

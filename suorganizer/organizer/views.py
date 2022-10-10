@@ -120,17 +120,12 @@ def tag_create(request):
         )
 
 
+@require_authenticated_permission(
+    'organizer.add_tag'
+)
 class TagCreate(CreateView):
     form_class = TagForm
     model = Tag
-
-    @require_authenticated_permission(
-        'organizer.add_tag'
-    )
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(
-            request, *args, **kwargs
-        )
 
 
 class StartupCreate(CreateView):
@@ -161,7 +156,9 @@ class NewsLinkUpdate(NewsLinkGetObjectMixin, StartupContextMixin, UpdateView):
     slug_url_kwarg = "newslink_slug"
     template_name_suffix = '_form_update'
 
-@class_login_required
+@require_authenticated_permission(
+    'organizer.change_tag'
+)
 class TagUpdate(UpdateView):
     form_class = TagForm
     model = Tag
@@ -173,6 +170,9 @@ class TagDelete(DeleteView, View):
         'organizer_tag_list'
     )
 
+@require_authenticated_permission(
+    'organizer.change_startup'
+)
 class StartupUpdate(UpdateView):
     form_class = StartupForm
     model = Startup

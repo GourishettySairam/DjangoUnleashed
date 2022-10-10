@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View, ListView, CreateView, YearArchiveView, MonthArchiveView, ArchiveIndexView, DetailView, DeleteView
 from jupyterlab_server import slugify
+from user.decorators import require_authenticated_permission
 from .models import Post
 
 from django.views.decorators.http import require_http_methods
@@ -20,6 +21,10 @@ class PostDelete(PostGetMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('blog_post_list')
 
+
+@require_authenticated_permission(
+    'blog.add_post'
+)
 class PostCreate(CreateView):
     form_class = PostForm
     template_name = 'blog/post_form.html'
