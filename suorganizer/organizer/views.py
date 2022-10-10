@@ -3,7 +3,7 @@ from django.shortcuts import (get_object_or_404, redirect, render)
 from django.http.response import HttpResponse, Http404, HttpResponseNotFound
 from django.urls import reverse, reverse_lazy
 from blog.forms import PostForm
-from user.decorators import custom_login_required
+from user.decorators import custom_login_required, require_authenticated_permission
 
 
 from .forms import NewsLinkForm, TagForm, StartupForm
@@ -124,7 +124,9 @@ class TagCreate(CreateView):
     form_class = TagForm
     model = Tag
 
-    @method_decorator(custom_login_required)
+    @require_authenticated_permission(
+        'organizer.add_tag'
+    )
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(
             request, *args, **kwargs
