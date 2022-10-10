@@ -3,7 +3,7 @@ from django.shortcuts import (get_object_or_404, redirect, render)
 from django.http.response import HttpResponse, Http404, HttpResponseNotFound
 from django.urls import reverse, reverse_lazy
 from blog.forms import PostForm
-from user.decorators import custom_login_required, require_authenticated_permission
+from user.decorators import class_login_required, custom_login_required, require_authenticated_permission
 
 
 from .forms import NewsLinkForm, TagForm, StartupForm
@@ -161,7 +161,7 @@ class NewsLinkUpdate(NewsLinkGetObjectMixin, StartupContextMixin, UpdateView):
     slug_url_kwarg = "newslink_slug"
     template_name_suffix = '_form_update'
 
-
+@class_login_required
 class TagUpdate(UpdateView):
     form_class = TagForm
     model = Tag

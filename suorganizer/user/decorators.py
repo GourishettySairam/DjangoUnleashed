@@ -4,6 +4,9 @@ from django.shortcuts import redirect
 from functools import wraps
 from django.utils.decorators import  method_decorator
 from django.contrib.auth.decorators import login_required, permission_required
+from django.core.exceptions import \
+    ImproperlyConfigured
+from django.views.generic import View
 
 def custom_login_required(view):
     # view argument must be a function
@@ -32,3 +35,15 @@ def require_authenticated_permission(permission):
         )
         return decorated_view
     return decorator
+
+def class_login_required(cls):
+    if (not isinstance(cls, type)
+        or not issubclass(cls, View)):
+        raise ImproperlyConfigured(
+            "class login_required"
+            " must be applied to subclasses "
+            "of view class."
+        )
+    decorator = method_decorator(login_required)
+    cls.dispatch = decorator(cls.dispatch)
+    return cls
