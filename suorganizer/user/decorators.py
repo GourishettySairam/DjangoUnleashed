@@ -19,6 +19,13 @@ def require_authenticated_permission(permission):
     # view must be a function
 
     def decorator(cls):
+        if (not isinstance(cls, type)
+        or not issubclass(cls, View)):
+            raise ImproperlyConfigured(
+                "require_authenticated_permission"
+                " must be applied to subclasses "
+                "of View class."
+            )
         check_auth = (
             method_decorator(login_required)
         )
