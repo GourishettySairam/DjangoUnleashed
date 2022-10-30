@@ -156,7 +156,9 @@ class NewsLinkUpdate(NewsLinkGetObjectMixin, StartupContextMixin, UpdateView):
     slug_url_kwarg = "newslink_slug"
     template_name_suffix = '_form_update'
 
-@class_login_required
+@require_authenticated_permission(
+    'organizer.change_tag'
+)
 class TagUpdate(UpdateView):
     form_class = TagForm
     model = Tag

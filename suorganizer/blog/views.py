@@ -27,7 +27,7 @@ class PostDelete(PostGetMixin, DeleteView):
 )
 class PostCreate(CreateView):
     form_class = PostForm
-    template_name = 'blog/post_form.html'
+    model = Post
 
     def get(self, request):
         return render(
