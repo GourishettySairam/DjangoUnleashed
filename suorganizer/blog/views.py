@@ -6,7 +6,7 @@ from .models import Post
 
 from django.views.decorators.http import require_http_methods
 from .forms import PostForm
-from .utils import PostGetMixin, DateObjectMixin
+from .utils import AllowFuturePermissionMixin, PostGetMixin, DateObjectMixin
 from core.utils import UpdateView
 from django.urls import reverse, reverse_lazy
 
@@ -47,10 +47,9 @@ class PostCreate(CreateView):
                 {'form': bound_form})
 
 
-class PostList(ArchiveIndexView):
+class PostList(AllowFuturePermissionMixin, ArchiveIndexView):
     template_name = 'blog/post_list.html'
     allow_empty = True
-    allow_future = True
     context_object_name = "post_list"
     date_field = "pub_date"
     make_object_list = True
@@ -65,30 +64,27 @@ class PostDetail(PostGetMixin, DetailView):
     model = Post
 
 
-class PostArchiveYear(YearArchiveView):
+class PostArchiveYear(AllowFuturePermissionMixin, YearArchiveView):
     model = Post
     date_field = 'pub_date'
     make_object_list: True
 
-class PostArchiveMonth(MonthArchiveView):
+class PostArchiveMonth(AllowFuturePermissionMixin, MonthArchiveView):
     model = Post
     date = 'pub_date'
     month_format = '%m'
 
 
 class PostDelete(DateObjectMixin, DeleteView):
-    allow_future = True
     date_field = 'pub_date'
     model = Post
     success_url = reverse_lazy('blog_post_list')
 
 class PostDetail(DateObjectMixin, DetailView):
-    allow_future = True
     date_field = "pub_date"
     model = Post
 
 class PostUpdate(DateObjectMixin, UpdateView):
-    allow_future = True
     date_field = "pub_date"
     model = Post
     form_class = PostForm

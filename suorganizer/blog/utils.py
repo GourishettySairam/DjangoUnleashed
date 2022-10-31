@@ -6,6 +6,14 @@ from django.views.generic.dates import (
     DateMixin, MonthMixin as BaseMonthMixin,
     YearMixin as BaseYearMixin, _date_from_string)
 
+
+class AllowFuturePermissionMixin():
+    def get_allow_future(self):
+        return self.request.user.has_perm(
+            'blog.view_future_post'
+        )
+
+
 class PostGetMixin:
     month_url_kwarg = 'month'
     year_url_kwarg = 'year'
@@ -52,7 +60,7 @@ class PostGetMixin:
             )
         return obj
 
-class DateObjectMixin(BaseYearMixin, BaseMonthMixin, DateMixin):
+class DateObjectMixin(AllowFuturePermissionMixin, BaseYearMixin, BaseMonthMixin, DateMixin):
 
     def get_object(self, queryset=None):
         year = self.get_year()
